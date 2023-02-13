@@ -36,7 +36,7 @@ class HBNBCommand(cmd.Cmd):
             newInstance = eval(token[0])()
             newInstance.save()
             print(newInstance.id)
-        except:
+        except NameError:
             print("** class doesn't exist **")
 
     def do_show(self, args):
@@ -51,7 +51,7 @@ class HBNBCommand(cmd.Cmd):
             return
         try:
             eval(token[0])
-        except:
+        except NameError:
             print("** class doesn't exist **")
 
         objDict = storage.all()
@@ -75,14 +75,14 @@ class HBNBCommand(cmd.Cmd):
 
         try:
             eval(token[0])
-        except:
+        except NameError:
             print("** class doesn't exist **")
         objDict = storage.all()
         keyId = token[0] + "." + token[1]
 
         try:
             del objDict[keyId]
-        except:
+        except NameError:
             print("** no instance found **")
         storage.save()
 
@@ -143,6 +143,7 @@ class HBNBCommand(cmd.Cmd):
     def do_quit(self, args):
         """Quit command to exit the program"""
         return True
+
 
 if __name__ == "__main__":
     console = HBNBCommand()
